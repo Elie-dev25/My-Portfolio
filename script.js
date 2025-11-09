@@ -194,9 +194,21 @@ if (contactForm) {
             return;
         }
         
-        // Simulate form submission
-        showNotification('Message envoyé avec succès!', 'success');
-        contactForm.reset();
+        // Create mailto link with form data
+        const mailtoLink = `mailto:elienjinedev@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+            `Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+        )}`;
+        
+        // Open email client
+        window.location.href = mailtoLink;
+        
+        // Show success notification
+        showNotification('Votre client email va s\'ouvrir...', 'success');
+        
+        // Reset form after a short delay
+        setTimeout(() => {
+            contactForm.reset();
+        }, 1000);
     });
 }
 
